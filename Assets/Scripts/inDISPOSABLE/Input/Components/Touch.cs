@@ -4,7 +4,7 @@ namespace Indisposable.Input
     
     public class Touch : MonoBehaviour
     {
-        public int Index;
+        public TouchPhase Phase;
 
         public float StartTime;
         public float EndTime;

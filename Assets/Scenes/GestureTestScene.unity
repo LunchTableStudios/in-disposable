@@ -122,9 +122,10 @@ GameObject:
   m_Component:
   - component: {fileID: 345740951}
   - component: {fileID: 345740950}
+  - component: {fileID: 345740952}
   - component: {fileID: 345740949}
   m_Layer: 0
-  m_Name: Gesture Input
+  m_Name: Input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,13 +150,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 345740948}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb3b6a0f57fbe458fa72068172dd205f, type: 3}
+  m_Script: {fileID: 11500000, guid: fa212299be9eb4d449475ef37d6da140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TouchStartTime: 0
-  TouchStartPosition: {x: 0, y: 0}
-  TouchEndPosition: {x: 0, y: 0}
-  TouchingLastFrame: 0
+  Phase: 0
+  StartTime: 0
+  EndTime: 0
+  StartPosition: {x: 0, y: 0}
+  EndPosition: {x: 0, y: 0}
+  ActiveLastFrame: 0
 --- !u!4 &345740951
 Transform:
   m_ObjectHideFlags: 0
@@ -169,6 +172,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &345740952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 345740948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb3b6a0f57fbe458fa72068172dd205f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1472018818
 GameObject:
   m_ObjectHideFlags: 0
