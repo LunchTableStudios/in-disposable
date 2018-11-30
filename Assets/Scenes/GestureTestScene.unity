@@ -122,6 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 345740951}
   - component: {fileID: 345740950}
+  - component: {fileID: 345740953}
   - component: {fileID: 345740952}
   - component: {fileID: 345740949}
   m_Layer: 0
@@ -183,6 +184,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb3b6a0f57fbe458fa72068172dd205f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Value: 0
+  Angle: 0
+--- !u!114 &345740953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 345740948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3334921bcae71489eb4954da2eb8a856, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Value:
+    x: 0
+    y: 0
 --- !u!1 &1472018818
 GameObject:
   m_ObjectHideFlags: 0
