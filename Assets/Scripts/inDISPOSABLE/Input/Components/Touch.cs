@@ -9,6 +9,8 @@ namespace Indisposable.Input
         public float StartTime;
         public float EndTime;
 
+        public Vector2 Velocity;
+
         public Vector2 StartPosition;
         public Vector2 EndPosition;
 

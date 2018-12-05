@@ -4,7 +4,9 @@ namespace Indisposable.Input
 
     public class GestureInput : MonoBehaviour
     {
+        public float DurationThreshold = 0.28f;
+        public float VelocityTheshold = 2f;
         public Gesture Value;
-        public float Angle;
+        public Vector2 Velocity;
     }
 }

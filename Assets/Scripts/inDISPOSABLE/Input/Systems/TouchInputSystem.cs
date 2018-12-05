@@ -27,15 +27,13 @@ namespace Indisposable.Input
                     float horizontalDistance = math.abs( touch.StartPosition.x - touch.EndPosition.x );
                     float verticalDistance = math.abs( touch.StartPosition.y - touch.EndPosition.y );
 
-                    Debug.Log( horizontalDistance + " : " + verticalDistance );
-
                     float horizontalInput = 0;
                     float verticalInput = 0;
 
-                    if( horizontalDistance >= 30f )
+                    if( horizontalDistance >= touchInput.DeadZoneThreshold.x )
                         horizontalInput = math.sign( touch.EndPosition.x - touch.StartPosition.x );
 
-                    if( verticalDistance >= 30f )
+                    if( verticalDistance >= touchInput.DeadZoneThreshold.y )
                         verticalInput = math.sign( touch.EndPosition.y - touch.StartPosition.y );
 
                     touchInput.Value = new float2( horizontalInput, verticalInput );

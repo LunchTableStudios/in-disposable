@@ -10,36 +10,26 @@ namespace Indisposable.Input
             public Touch TouchComponent;
         }
 
-        private struct TouchData
-        {
-            public int touchCount;
-            public Vector2 position;
-        }
-
         protected override void OnUpdate()
         {
             foreach( TouchEntityFilter entity in GetEntities<TouchEntityFilter>() )
             {
                 Touch touch = entity.TouchComponent;
 
-                TouchData touchData = GetTouchData();
-                
                 touch.Phase = TouchPhase.Stationary;
 
-                if( touchData.touchCount > 0 )
+                if( Input.touches.Length > 0 )
                 {
                     if( !touch.ActiveLastFrame )
                     {
                         touch.StartTime = Time.time;
-                        touch.StartPosition = touchData.position;
-
-                        touch.Phase = TouchPhase.Began;
+                        touch.StartPosition = Input.touches[0].position;
                     }
 
-                    touch.EndPosition = touchData.position;
+                    touch.Velocity = Vector2.Lerp( touch.Velocity, Input.touches[0].deltaPosition, Time.deltaTime * 10 );
 
-                    if( touch.EndPosition != touch.StartPosition )
-                        touch.Phase = TouchPhase.Moved;
+                    touch.EndTime = Time.time;
+                    touch.EndPosition = Input.touches[0].position;
 
                     touch.ActiveLastFrame = true;
                 }
@@ -50,29 +40,15 @@ namespace Indisposable.Input
                         touch.EndTime = Time.time;
                         touch.Phase = TouchPhase.Ended;
                     }
+                    else
+                    {
+                        touch.StartPosition = Vector2.zero;
+                        touch.EndPosition = Vector2.zero;
+                    }
 
-                    touch.ActiveLastFrame = false;
+                    touch.ActiveLastFrame = false;   
                 }
             }
-        }
-
-        private TouchData GetTouchData()
-        {
-            TouchData touchData = new TouchData();
-            touchData.touchCount = 0;
-
-            if( Input.touchCount > 0 )
-            {
-                touchData.touchCount = Input.touchCount;
-                touchData.position = Input.touches[0].position;
-            }
-            else if( Input.GetMouseButton(0) )
-            {
-                touchData.touchCount = 1;
-                touchData.position = Input.mousePosition;
-            }
-
-            return touchData;
         }
     }
 }

@@ -6,5 +6,6 @@ namespace Indisposable.Input
     public class TouchInput : MonoBehaviour
     {
         public float2 Value;
+        public float2 DeadZoneThreshold = new float2( 30, 30 );
     }
 }

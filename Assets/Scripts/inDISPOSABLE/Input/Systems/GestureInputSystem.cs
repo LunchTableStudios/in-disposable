@@ -27,26 +27,25 @@ namespace Indisposable.Input
                 GestureInput gestureInput = entity.InputComponent;
 
                 gestureInput.Value = Gesture.NONE;
-                gestureInput.Angle = 0;
+                gestureInput.Velocity = Vector2.zero;
                 if( touch.Phase == TouchPhase.Ended )
                 {
+                    Debug.Log( "Gesture" );
                     float touchDuration = touch.EndTime - touch.StartTime;
-                    float travelDistance = Vector2.Distance( touch.StartPosition, touch.EndPosition );
-
-                    if( touchDuration <= 0.18f )
+                    float touchDistance = Vector2.Distance( touch.EndPosition, touch.StartPosition );
+                    Debug.Log("gesture velocity: " + touch.Velocity.magnitude + ", duration: " + touchDuration);
+                    if( ( touchDuration <= gestureInput.DurationThreshold && touchDistance > 0.1f ) || touch.Velocity.magnitude > gestureInput.VelocityTheshold )
                     {
-                        if( travelDistance <= 2 )
-                        {
-                            gestureInput.Value = Gesture.TAP;
-                        }
-                        else
-                        {
-                            float swipeAngle = Mathf.Atan2( touch.EndPosition.y - touch.StartPosition.y, touch.EndPosition.x - touch.StartPosition.x ) * Mathf.Rad2Deg;
-                            gestureInput.Value = Gesture.SWIPE;
-                            gestureInput.Angle = swipeAngle;
-                        }
-
-                        Debug.Log( string.Format( "Type: {0}, Angle: {1}", gestureInput.Value, gestureInput.Angle ) );
+                        gestureInput.Value = Gesture.SWIPE;
+                        gestureInput.Velocity = touch.Velocity;
+                    }
+                    else if( ( touchDuration <= gestureInput.DurationThreshold && touchDistance <= 0.1f ) )
+                    {
+                        gestureInput.Value = Gesture.TAP;
+                    }
+                    else
+                    {
+                        gestureInput.Value = Gesture.NONE;
                     }
                 }                    
             }
