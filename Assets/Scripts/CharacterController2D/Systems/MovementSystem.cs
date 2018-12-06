@@ -9,7 +9,7 @@ namespace CharacterController2D
     {
         private struct MovementEntityFilter
         {
-            public readonly Movement MovementComponent;
+            public readonly Velocity VelocityComponent;
             public Transform TransformComponent;
         }
 
@@ -17,10 +17,10 @@ namespace CharacterController2D
         {
             foreach( MovementEntityFilter entity in GetEntities<MovementEntityFilter>() )
             {
-                Movement movement = entity.MovementComponent;
+                Velocity velocity = entity.VelocityComponent;
                 Transform transform = entity.TransformComponent;
 
-                Vector3 movementVector = new Vector3( movement.Value.x, movement.Value.y, 0 );
+                Vector3 movementVector = new Vector3( velocity.Delta.x, velocity.Delta.y, 0 );
 
                 transform.Translate( movementVector );
             }

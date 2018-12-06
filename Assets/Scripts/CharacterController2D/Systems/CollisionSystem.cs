@@ -10,7 +10,7 @@ namespace CharacterController2D
     {
         private struct CollidableEntityFilter
         {
-            public Movement MovementComponent;
+            public Velocity VelocityComponent;
             public CollisionData CollisionComponent;
             public readonly BoxCollider2D ColliderComponent;
         }
@@ -34,14 +34,14 @@ namespace CharacterController2D
         {
             foreach( CollidableEntityFilter entity in GetEntities<CollidableEntityFilter>() )
             {
-                Movement movement = entity.MovementComponent;
+                Velocity velocity = entity.VelocityComponent;
                 CollisionData collisionData = entity.CollisionComponent;
                 BoxCollider2D collider = entity.ColliderComponent;
 
                 collisionData.previousSlopeAngle = collisionData.slopeAngle;
                 ResetCollisionState( collisionData );
 
-                float2 movementDelta = movement.Value;
+                float2 movementDelta = velocity.Delta;
 
                 RaycastOrigins raycastOrigins = CalculateRaycastOrigins( collider );
                 RaycastSpacing raycastSpacing = CalculateRaycastSpacing( collider );
@@ -55,7 +55,7 @@ namespace CharacterController2D
                 if( movementDelta.y != 0 )
                     HandleVerticalMovement( ref movementDelta, collider.edgeRadius, collisionData, raycastOrigins, raycastSpacing );
 
-                movement.Value = movementDelta;
+                velocity.Delta = movementDelta;
             }
         }
 

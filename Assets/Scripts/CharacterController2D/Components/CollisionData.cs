@@ -10,7 +10,11 @@ namespace CharacterController2D
         public float MaxSlopeAngle = 65;
         public bool AscendingSlope = false;
         public bool DecendingSlope = false;
-        [ HideInInspector ] public float slopeAngle = 0;
-        [ HideInInspector ] public float previousSlopeAngle = 0;
+
+        [ HideInInspector ] 
+        public float slopeAngle = 0;
+        
+        [ HideInInspector ] 
+        public float previousSlopeAngle = 0;
     }
 }

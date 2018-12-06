@@ -8,8 +8,7 @@ namespace CharacterController2D
     {
         private struct VelocityEntityFilter
         {
-            public readonly Velocity VelocityComponent;
-            public Movement MovementComponent;
+            public Velocity VelocityComponent;
         }
 
         protected override void OnUpdate()
@@ -19,9 +18,8 @@ namespace CharacterController2D
             foreach( VelocityEntityFilter entity in GetEntities<VelocityEntityFilter>() )
             {
                 Velocity velocity = entity.VelocityComponent;
-                Movement movement = entity.MovementComponent;
 
-                movement.Value = velocity.Value * Time.deltaTime;
+                velocity.Delta = velocity.Value * Time.deltaTime;
             }
         }
     }

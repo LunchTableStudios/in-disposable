@@ -6,7 +6,7 @@ namespace Indisposable.Player
 	using Input;
 	using CharacterController2D;
 
-	public class TouchMovementSystem : ComponentSystem
+	public class KeyboardMovementSystem : ComponentSystem
 	{
 		private struct MovementEntityFilter
 		{
@@ -17,7 +17,7 @@ namespace Indisposable.Player
 
 		private struct InputEntityComponent
 		{
-			public readonly TouchInput InputComponent;
+			public readonly KeyboardInput InputComponent;
 		}
 
 		protected override void OnUpdate()
@@ -26,8 +26,8 @@ namespace Indisposable.Player
 
 			if( GetEntities<InputEntityComponent>().Length > 0 )
 			{
-				TouchInput input = GetEntities<InputEntityComponent>()[0].InputComponent;
-				horizontalInput = input.Value.x;
+				KeyboardInput input = GetEntities<InputEntityComponent>()[0].InputComponent;
+				horizontalInput = input.Movement.x;
 			}
 
 			foreach( MovementEntityFilter entity in GetEntities<MovementEntityFilter>() )

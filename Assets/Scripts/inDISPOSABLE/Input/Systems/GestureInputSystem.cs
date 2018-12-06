@@ -13,7 +13,7 @@ namespace Indisposable.Input
     [ UpdateAfter( typeof( TouchSystem ) ) ]
     public class GestureInputSystem : ComponentSystem
     {
-        private struct GestureInputEntityFilter
+        private struct InputEntityFilter
         {
             public readonly Touch TouchComponent;
             public GestureInput InputComponent;
@@ -21,7 +21,7 @@ namespace Indisposable.Input
 
         protected override void OnUpdate()
         {
-            foreach( GestureInputEntityFilter entity in GetEntities<GestureInputEntityFilter>() )
+            foreach( InputEntityFilter entity in GetEntities<InputEntityFilter>() )
             {
                 Touch touch = entity.TouchComponent;
                 GestureInput gestureInput = entity.InputComponent;
@@ -30,10 +30,9 @@ namespace Indisposable.Input
                 gestureInput.Velocity = Vector2.zero;
                 if( touch.Phase == TouchPhase.Ended )
                 {
-                    Debug.Log( "Gesture" );
                     float touchDuration = touch.EndTime - touch.StartTime;
                     float touchDistance = Vector2.Distance( touch.EndPosition, touch.StartPosition );
-                    Debug.Log("gesture velocity: " + touch.Velocity.magnitude + ", duration: " + touchDuration);
+                    
                     if( ( touchDuration <= gestureInput.DurationThreshold && touchDistance > 0.1f ) || touch.Velocity.magnitude > gestureInput.VelocityTheshold )
                     {
                         gestureInput.Value = Gesture.SWIPE;
